@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: SERVICES-OFFERING
+  datasource:
+    url: jdbc:mysql://localhost:3306/services_offering
+    username: root
+    password: ab12+-34
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+
+server:
+  port: 8084

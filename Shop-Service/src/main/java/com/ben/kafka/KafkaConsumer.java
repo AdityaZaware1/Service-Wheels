@@ -17,7 +17,6 @@ public class KafkaConsumer {
         Shop shop = new Shop();
         shop.setName("Mechanic' Shop");
         shop.setOwnerEmail(email);
-        shop.setService("Mechanic");
         service.registerShop(shop);
 
     }

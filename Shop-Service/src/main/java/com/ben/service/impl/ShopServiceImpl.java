@@ -29,8 +29,8 @@ public class ShopServiceImpl implements ShopService {
         existing.setAddress(shop.getAddress());
         existing.setOwnerPhone(shop.getOwnerPhone());
         existing.setOwnerName(shop.getOwnerName());
-        existing.setService(shop.getService());
         existing.setVehicleType(shop.getVehicleType());
+        existing.setOpenTime(shop.getOpenTime());
         Shop updatedShop = shopRepo.save(existing);
         return updatedShop;
     }

@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Data
 @AllArgsConstructor
@@ -22,4 +24,7 @@ public class ShopDto {
     private String vehicleType;
     private BigDecimal ratings;
     private String service;
+    private LocalTime openTime;
+    private LocalTime closeTime;
+
 }

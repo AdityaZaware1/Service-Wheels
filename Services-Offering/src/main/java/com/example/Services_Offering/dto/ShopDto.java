@@ -1,11 +1,6 @@
-package com.ben.entity;
+package com.example.Services_Offering.dto;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,12 +11,8 @@ import java.time.LocalTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-@Entity
-public class Shop {
+public class ShopDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String name;
@@ -32,7 +23,6 @@ public class Shop {
     private String address;
     private String vehicleType;
     private BigDecimal ratings;
-
     private LocalTime openTime;
     private LocalTime closeTime;
 }
