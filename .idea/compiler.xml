@@ -12,7 +12,7 @@
         </processorPath>
         <module name="Shop-Service" />
       </profile>
-      <profile name="Annotation profile for Booking-Service" enabled="true">
+      <profile name="Annotation profile for Payment-Service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -20,6 +20,7 @@
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
         </processorPath>
         <module name="Booking-Service" />
+        <module name="Payment-Service" />
         <module name="Services-Offering" />
         <module name="User-Service" />
       </profile>
@@ -32,6 +33,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Available-Service" options="-parameters" />
       <module name="Booking-Service" options="-parameters" />
+      <module name="Payment-Service" options="-parameters" />
       <module name="Services-Offering" options="-parameters" />
       <module name="Shop-Service" options="-parameters" />
       <module name="User-Service" options="-parameters" />
