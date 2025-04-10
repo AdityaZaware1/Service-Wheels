@@ -5,7 +5,6 @@ import com.ben.dto.UserDto;
 import com.ben.entity.PaymentOrder;
 import com.ben.enums.PaymentOrderStatus;
 import com.ben.repo.PaymentOrderRepo;
-import com.ben.repo.PaymentRepo;
 import com.ben.reponse.PaymentResponse;
 import com.ben.service.PaymentService;
 import com.razorpay.Payment;
@@ -20,7 +19,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class PaymentServiceImpl implements PaymentService {
 
-    private final PaymentRepo paymentRepo;
     private final PaymentOrderRepo paymentOrderRepo;
 
     private String razorPayKey;
@@ -70,7 +68,7 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     public PaymentOrder getPaymentOrderByPaymentLinkId(String paymentLinkId) {
-        return paymentOrderRepo.findPaymentLinkId(paymentLinkId);
+        return paymentOrderRepo.getPaymentOrdersByPaymentLinkId(paymentLinkId);
     }
 
     @Override

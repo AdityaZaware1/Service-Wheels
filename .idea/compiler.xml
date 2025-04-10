@@ -2,17 +2,14 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
-      <profile name="Annotation profile for Shop-Service" enabled="true">
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
-        </processorPath>
-        <module name="Shop-Service" />
+        <module name="Server-Registry" />
       </profile>
-      <profile name="Annotation profile for Payment-Service" enabled="true">
+      <profile name="Annotation profile for Booking-Service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -20,6 +17,7 @@
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
         </processorPath>
         <module name="Booking-Service" />
+        <module name="Shop-Service" />
         <module name="Payment-Service" />
         <module name="Services-Offering" />
         <module name="User-Service" />
@@ -34,6 +32,7 @@
       <module name="Available-Service" options="-parameters" />
       <module name="Booking-Service" options="-parameters" />
       <module name="Payment-Service" options="-parameters" />
+      <module name="Server-Registry" options="-parameters" />
       <module name="Services-Offering" options="-parameters" />
       <module name="Shop-Service" options="-parameters" />
       <module name="User-Service" options="-parameters" />
