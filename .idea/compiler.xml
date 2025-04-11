@@ -7,9 +7,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="Api-Gateway" />
         <module name="Server-Registry" />
       </profile>
-      <profile name="Annotation profile for Booking-Service" enabled="true">
+      <profile name="Annotation profile for User-Service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -18,8 +19,8 @@
         </processorPath>
         <module name="Booking-Service" />
         <module name="Shop-Service" />
-        <module name="Payment-Service" />
         <module name="Services-Offering" />
+        <module name="Payment-Service" />
         <module name="User-Service" />
       </profile>
     </annotationProcessing>
@@ -29,6 +30,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Api-Gateway" options="-parameters" />
       <module name="Available-Service" options="-parameters" />
       <module name="Booking-Service" options="-parameters" />
       <module name="Payment-Service" options="-parameters" />

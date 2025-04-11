@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: API-GATEWAY
+
+  cloud:
+    gateway:
+      mvc:
+        routes:
+          - id: USER-SERVICE
+            uri: lb://USER-SERVICE
+            predicates:
+              - Path=/api/user/**
+
+          - id: SHOP-SERVICE
+            uri: lb://SHOP-SERVICE
+            predicates:
+              - Path=/api/shop/**
+
+          - id: SERVICES-OFFERING
+            uri: lb://SERVICES-OFFERING
+            predicates:
+              - Path=/api/services/**
+
+          - id: BOOKING-SERVICE
+            uri: lb://BOOKING-SERVICE
+            predicates:
+              - Path=/api/booking/**
+
+          - id: PAYMENT-SERVICE
+            uri: lb://BOOKING-SERVICE
+            predicates:
+              - Path=/api/payment/**
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+    fetch-registry: true
+    register-with-eureka: true
+
+server:
+  port: 8090
