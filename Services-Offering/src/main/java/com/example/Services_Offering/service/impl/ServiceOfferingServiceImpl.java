@@ -2,11 +2,11 @@ package com.example.Services_Offering.service.impl;
 
 import com.example.Services_Offering.dto.ShopDto;
 import com.example.Services_Offering.entity.Services;
+import com.example.Services_Offering.external.ShopService;
 import com.example.Services_Offering.repo.ServiceRepo;
 import com.example.Services_Offering.service.ServiceOfferingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -15,9 +15,16 @@ import java.util.List;
 public class ServiceOfferingServiceImpl implements ServiceOfferingService {
 
     private final ServiceRepo serviceRepo;
+    private final ShopService shopService;
 
     @Override
     public Services createServiceOffering(Services services, Long shopId) {
+
+        ShopDto shopDto = shopService.getShop(shopId);
+
+        if (shopDto == null) {
+            throw new RuntimeException("shop in not exist" + shopId);
+        }
 
         Services newService = new Services();
         newService.setName(services.getName());

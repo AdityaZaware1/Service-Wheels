@@ -25,11 +25,11 @@ public class BookingController {
     public ResponseEntity<Booking> createBooking(
             @RequestParam Long id,
             @RequestBody BookingRequest bookingRequest,
-            @RequestBody ShopDto shopDto,
+            @RequestParam Long shopId,
             @RequestBody List<ServiceDto> serviceDtos
     ) {
 
-        return ResponseEntity.ok(bookingService.createBooking(bookingRequest, id, shopDto, serviceDtos));
+        return ResponseEntity.ok(bookingService.createBooking(bookingRequest, id, shopId, serviceDtos));
     }
 
     @GetMapping("get/{id}/")

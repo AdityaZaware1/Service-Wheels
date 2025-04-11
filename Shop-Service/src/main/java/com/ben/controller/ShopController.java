@@ -55,4 +55,5 @@ public class ShopController {
     public ResponseEntity<List<Shop>> getShopByVehicleType(@PathVariable String vehicleType) {
         return ResponseEntity.ok(shopService.getShopByVehicleType(vehicleType));
     }
+
 }

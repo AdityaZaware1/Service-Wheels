@@ -17,14 +17,14 @@ public class PaymentController {
 
     private final PaymentService paymentService;
 
-    @PostMapping("/create")
+    @PostMapping("/create/{bookingId}/{userId}")
     public ResponseEntity<PaymentResponse> createPaymentLink(
-            @RequestBody BookingDto bookingDto,
-            @RequestBody UserDto userDto,
+            @PathVariable Long bookingId,
+            @PathVariable Long userId,
             @RequestBody PaymentOrder paymentOrder
             ) throws RazorpayException {
 
-        PaymentResponse paymentResponse = paymentService.createPaymentOrder(paymentOrder, userDto, bookingDto);
+        PaymentResponse paymentResponse = paymentService.createPaymentOrder(paymentOrder, userId, bookingId);
         return ResponseEntity.ok(paymentResponse);
     }
 

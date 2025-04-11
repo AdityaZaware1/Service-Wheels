@@ -11,8 +11,8 @@ import com.razorpay.RazorpayException;
 public interface PaymentService {
 
     public PaymentResponse createPaymentOrder(PaymentOrder paymentOrder,
-                                              UserDto userDto,
-                                              BookingDto bookingDto) throws RazorpayException;
+                                              Long userId,
+                                              Long bookingId) throws RazorpayException;
 
     PaymentOrder getPaymentOrder(Long id);
 

@@ -5,6 +5,8 @@ import com.ben.Booking.Service.dto.ShopDto;
 import com.ben.Booking.Service.dto.ShopReport;
 import com.ben.Booking.Service.entity.Booking;
 import com.ben.Booking.Service.enums.BookingStatus;
+import com.ben.Booking.Service.external.AvailableService;
+import com.ben.Booking.Service.external.ShopService;
 import com.ben.Booking.Service.repo.BookingRepo;
 import com.ben.Booking.Service.request.BookingRequest;
 import com.ben.Booking.Service.service.BookingService;
@@ -21,10 +23,12 @@ import java.util.stream.Collectors;
 public class BookingServiceImpl implements BookingService {
 
     private final BookingRepo bookingRepo;
+    private final AvailableService availableService;
+    private final ShopService shopService;
 
     @Override
     public Booking createBooking(BookingRequest booking,
-                                 Long userOd, ShopDto shop, List<ServiceDto> serviceDtos) {
+                                 Long userOd, Long shopId, List<ServiceDto> serviceDtos) {
 
         int totalDuration = serviceDtos.stream()
                 .mapToInt(ServiceDto::getDuration)
@@ -32,6 +36,8 @@ public class BookingServiceImpl implements BookingService {
 
         LocalDateTime startTime = booking.getStartTime();
         LocalDateTime endTime = startTime.plusMinutes(totalDuration);
+
+        ShopDto shop = shopService.getShop(shopId);
 
         Boolean isSlotAvailable = isTimeSlotAvailable(shop, startTime, endTime);
 
@@ -42,6 +48,17 @@ public class BookingServiceImpl implements BookingService {
         int totalPrice = serviceDtos.stream()
                 .mapToInt(ServiceDto::getPrice)
                 .sum();
+
+        for(ServiceDto serviceDto : serviceDtos) {
+            ServiceDto service = availableService.getService(serviceDto.getId());
+
+            if(service == null) {
+                throw new RuntimeException("Service not found");
+            }
+            List<Long> serviceIds = serviceDtos.stream()
+                    .map(ServiceDto::getId)
+                    .toList();
+        }
 
         List<Long> serviceIds = serviceDtos.stream()
                 .map(ServiceDto::getId)

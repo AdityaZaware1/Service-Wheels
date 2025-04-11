@@ -15,7 +15,7 @@ import java.util.List;
 
 public interface BookingService {
 
-    Booking createBooking(BookingRequest booking, Long userOd, ShopDto shopId, List<ServiceDto> serviceDtos);
+    Booking createBooking(BookingRequest booking, Long userOd, Long shopId, List<ServiceDto> serviceDtos);
 
     List<Booking> getBookingsByUser(Long userId);
 

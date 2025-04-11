@@ -4,6 +4,8 @@ import com.ben.dto.BookingDto;
 import com.ben.dto.UserDto;
 import com.ben.entity.PaymentOrder;
 import com.ben.enums.PaymentOrderStatus;
+import com.ben.external.BookingService;
+import com.ben.external.UserService;
 import com.ben.repo.PaymentOrderRepo;
 import com.ben.reponse.PaymentResponse;
 import com.ben.service.PaymentService;
@@ -12,6 +14,7 @@ import com.razorpay.PaymentLink;
 import com.razorpay.RazorpayClient;
 import com.razorpay.RazorpayException;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.User;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
@@ -21,12 +24,20 @@ public class PaymentServiceImpl implements PaymentService {
 
     private final PaymentOrderRepo paymentOrderRepo;
 
+    private final BookingService bookingService;
+    private final UserService userService;
+
     private String razorPayKey;
 
     private String razorPaySecret;
 
     @Override
-    public PaymentResponse createPaymentOrder(PaymentOrder paymentOrder, UserDto userDto, BookingDto bookingDto) throws RazorpayException {
+    public PaymentResponse createPaymentOrder(PaymentOrder paymentOrder, Long userId, Long bookingId) throws RazorpayException {
+
+        BookingDto bookingDto = bookingService.getBooking(bookingId);
+
+        UserDto userDto = userService.getUserById(userId);
+
         Long amount = (long) bookingDto.getTotalCost();
 
         PaymentOrder order = new PaymentOrder();
