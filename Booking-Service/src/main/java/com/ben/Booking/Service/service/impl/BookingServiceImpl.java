@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,11 +29,31 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public Booking createBooking(BookingRequest booking,
-                                 Long userOd, Long shopId, List<ServiceDto> serviceDtos) {
+                                 Long userOd, Long shopId, List<Long> serviceIds) {
 
-        int totalDuration = serviceDtos.stream()
-                .mapToInt(ServiceDto::getDuration)
-                .sum();
+
+        int totalDuration = 0;
+        int totalPrice = 0;
+
+        List<Long> serviceBooking = new ArrayList<>();
+
+        for(Long serviceId : serviceIds) {
+            ServiceDto serviceDto = availableService.getService(serviceId);
+            serviceBooking.add(serviceId);
+
+            if (serviceDto == null) {
+                throw new RuntimeException("Service not found");
+            }
+
+            totalDuration += serviceDto.getDuration();
+            totalPrice += serviceDto.getPrice();
+
+
+        }
+
+//        int totalDuration = serviceDtos.stream()
+//                .mapToInt(ServiceDto::getDuration)
+//                .sum();
 
         LocalDateTime startTime = booking.getStartTime();
         LocalDateTime endTime = startTime.plusMinutes(totalDuration);
@@ -45,32 +66,13 @@ public class BookingServiceImpl implements BookingService {
             throw new RuntimeException("Slot is not available");
         }
 
-        int totalPrice = serviceDtos.stream()
-                .mapToInt(ServiceDto::getPrice)
-                .sum();
-
-        for(ServiceDto serviceDto : serviceDtos) {
-            ServiceDto service = availableService.getService(serviceDto.getId());
-
-            if(service == null) {
-                throw new RuntimeException("Service not found");
-            }
-            List<Long> serviceIds = serviceDtos.stream()
-                    .map(ServiceDto::getId)
-                    .toList();
-        }
-
-        List<Long> serviceIds = serviceDtos.stream()
-                .map(ServiceDto::getId)
-                .toList();
-
         Booking newBooking = new Booking();
 
         newBooking.setShopId(shop.getId());
         newBooking.setUserId(userOd);
         newBooking.setStartTime(startTime);
         newBooking.setEndTime(endTime);
-        newBooking.setServiceIds(serviceIds);
+        newBooking.setServiceIds(serviceBooking);
         newBooking.setStatus(BookingStatus.PENDING);
         newBooking.setTotalCost(totalPrice);
 

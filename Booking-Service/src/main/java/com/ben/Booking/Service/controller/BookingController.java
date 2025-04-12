@@ -26,7 +26,7 @@ public class BookingController {
             @RequestParam Long id,
             @RequestBody BookingRequest bookingRequest,
             @RequestParam Long shopId,
-            @RequestBody List<ServiceDto> serviceDtos
+            @RequestBody List<Long> serviceDtos
     ) {
 
         return ResponseEntity.ok(bookingService.createBooking(bookingRequest, id, shopId, serviceDtos));
