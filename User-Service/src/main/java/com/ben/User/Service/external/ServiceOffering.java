@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name = "SERVICES_OFFERING")
+@FeignClient(name = "SERVICES-OFFERING")
 public interface ServiceOffering {
 
     @PostMapping("/create/{id}")

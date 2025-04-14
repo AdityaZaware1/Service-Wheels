@@ -1,6 +1,4 @@
 spring:
-  application:
-    name: API-GATEWAY
 
   cloud:
     gateway:
@@ -30,6 +28,16 @@ spring:
             uri: lb://BOOKING-SERVICE
             predicates:
               - Path=/api/payment/**
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:9090/realms/service-wheels/protocol/openid-connect/certs
+          issuer-uri: http://localhost:9090/realms/service-wheels
+
+  application:
+    name: API-GATEWAY
 
 eureka:
   client:

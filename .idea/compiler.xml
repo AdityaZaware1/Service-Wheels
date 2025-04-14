@@ -8,9 +8,10 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Api-Gateway" />
+        <module name="Config-Server" />
         <module name="Server-Registry" />
       </profile>
-      <profile name="Annotation profile for Services-Offering" enabled="true">
+      <profile name="Annotation profile for Shop-Service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -33,6 +34,7 @@
       <module name="Api-Gateway" options="-parameters" />
       <module name="Available-Service" options="-parameters" />
       <module name="Booking-Service" options="-parameters" />
+      <module name="Config-Server" options="-parameters" />
       <module name="Payment-Service" options="-parameters" />
       <module name="Server-Registry" options="-parameters" />
       <module name="Services-Offering" options="-parameters" />
