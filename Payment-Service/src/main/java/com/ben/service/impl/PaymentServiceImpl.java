@@ -6,6 +6,7 @@ import com.ben.entity.PaymentOrder;
 import com.ben.enums.PaymentOrderStatus;
 import com.ben.external.BookingService;
 import com.ben.external.UserService;
+import com.ben.kafka.KafkaProducer;
 import com.ben.repo.PaymentOrderRepo;
 import com.ben.reponse.PaymentResponse;
 import com.ben.service.PaymentService;
@@ -26,6 +27,7 @@ public class PaymentServiceImpl implements PaymentService {
 
     private final BookingService bookingService;
     private final UserService userService;
+    private final KafkaProducer kafkaProducer;
 
     private String razorPayKey;
 
@@ -114,7 +116,7 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public Boolean updatePaymentOrderStatus(Long orderId, PaymentOrder paymentOrder, String paymentLinkId) throws RazorpayException {
+    public Boolean updatePaymentOrderStatus(Long orderId, PaymentOrder paymentOrder, String paymentLinkId, Long booking) throws RazorpayException {
 
         if(paymentOrder.getStatus().equals(PaymentOrderStatus.PENDING)) {
             RazorpayClient razorpayClient = new RazorpayClient(razorPayKey, razorPaySecret);
@@ -125,8 +127,11 @@ public class PaymentServiceImpl implements PaymentService {
 
             if(status.equals("captured")) {
                 // produce kafka event
+
+                kafkaProducer.sendMessage(booking.toString());
                 paymentOrder.setStatus(PaymentOrderStatus.COMPLETED);
                 paymentOrderRepo.save(paymentOrder);
+
                 return true;
             }
         }

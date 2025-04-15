@@ -21,5 +21,5 @@ public interface PaymentService {
     PaymentLink createRazorPayPaymentLink(UserDto user, Long amount, Long orderId) throws RazorpayException;
 
     Boolean updatePaymentOrderStatus(Long orderId, PaymentOrder paymentOrder,
-                                     String paymentLinkId) throws RazorpayException;
+                                     String paymentLinkId, Long booking) throws RazorpayException;
 }

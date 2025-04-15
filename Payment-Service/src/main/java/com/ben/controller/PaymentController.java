@@ -41,10 +41,13 @@ public class PaymentController {
     }
 
 
-    @GetMapping("/update/{orderId}/{paymentLinkId}")
-    public ResponseEntity<Boolean> updatePaymentOrderStatus(@PathVariable Long orderId, @RequestBody PaymentOrder paymentOrder, @PathVariable String paymentLinkId) throws RazorpayException {
+    @GetMapping("/update/{orderId}/{paymentLinkId}/{booking}")
+    public ResponseEntity<Boolean> updatePaymentOrderStatus(@PathVariable Long orderId,
+                                                            @RequestBody PaymentOrder paymentOrder,
+                                                            @PathVariable String paymentLinkId,
+                                                            @PathVariable Long booking) throws RazorpayException {
 
-        return ResponseEntity.ok(paymentService.updatePaymentOrderStatus(orderId, paymentOrder, paymentLinkId));
+        return ResponseEntity.ok(paymentService.updatePaymentOrderStatus(orderId, paymentOrder, paymentLinkId, booking));
     }
 
 }
